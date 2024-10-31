@@ -25,12 +25,30 @@ class Pendulo {
     renderizar() {
         this.posicaoAtual.set(this.comprimento * Math.sin(this.angulo), this.comprimento * Math.cos(this.angulo), 0);
         this.posicaoAtual.add(this.origem);
+    
         stroke(200);
         line(this.origem.x, this.origem.y, this.posicaoAtual.x, this.posicaoAtual.y);
         fill(150);
         ellipse(this.posicaoAtual.x, this.posicaoAtual.y, this.massa, this.massa);
+    
+        // Calcule a posição do canvas na página para posicionar corretamente o ponto
+        const canvas = document.querySelector('canvas');
+        const canvasRect = canvas.getBoundingClientRect();
+    
+        // Criação do ponto laranja
+        const ponto = document.createElement('div');
+        ponto.classList.add('ponto');
+        ponto.style.left = `${canvasRect.left + this.posicaoAtual.x -12}px`;
+        ponto.style.top = `${canvasRect.top + this.posicaoAtual.y -12}px`;
+        document.body.appendChild(ponto);
+    
+        // Remoção do ponto após 1500ms
+        setTimeout(() => {
+            ponto.remove();
+        }, 2000);
     }
-
+    
+    
     clicar(mx, my) {
         const distancia = dist(mx, my, this.posicaoAtual.x, this.posicaoAtual.y);
         if (distancia < this.massa / 2) {
