@@ -4,14 +4,6 @@ body {
     position: relative; /* Necessário para usar o position absolute do painel */
 }
 
-canvas {
-    display: block;
-    margin: 0 auto;
-    border-radius: 12px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-    z-index: 0; /* Canvas fica no fundo */
-}
-
 .controle {
     position: absolute; /* Flutua sobre o canvas */
     top: 10px; /* Ajusta a distância do topo da página */
@@ -23,7 +15,7 @@ canvas {
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
-    z-index: 1; /* Painel sobrepõe o canvas */
+    z-index: 50; /* Painel sobrepõe o canvas */
 }
 
 h1 {
@@ -79,4 +71,23 @@ input[type="range"] {
     border-radius: 50%;
     background: #8bdec2;
     cursor: pointer;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    z-index: 1; /* Canvas acima dos pontos */
+    position: relative; /* Necessário para o z-index funcionar */
+}
+
+.ponto {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(231, 137, 36, 0.25);
+    border-radius: 5px;
+    pointer-events: none;
+    z-index: 1; /* Ponto fica abaixo do canvas */
 }
